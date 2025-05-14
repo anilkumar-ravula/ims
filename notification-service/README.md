@@ -59,21 +59,36 @@ A Spring Boot-based microservice for sending notifications via Email, Slack, SMS
 Build and run:
 
 ```bash
-mvn clean install
 docker build -t imr/notification-service .
 docker run -p 8080:8080 imr/notification-service
 ```
 
 Build and run along with postgress:
 ```bash
-mvn clean install
 docker build -t imr/notification-service .
 docker-compose up -d
 ```
 
 Checking API is running:
 
-curl --location 'http://localhost:8080/api/notify' 
+curl --location 'http://localhost:8080/api/notify'
+
+curl --location 'http://localhost:8080/api/notify' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+"channel": "EMAIL",
+"recipient": "user@example.com",
+"message": "Server down!",
+"incidentId": "1234"
+}'
+curl --location 'http://localhost:8080/api/notify' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+"channel": "EMAIL",
+"recipient": "user@example.com",
+"message": "Server down!",
+"incidentId": "1234"
+}'
 
 Ideal Response if it is working : Welcome to notifications
 

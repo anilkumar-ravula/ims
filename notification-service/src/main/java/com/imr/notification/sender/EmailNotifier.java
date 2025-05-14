@@ -27,6 +27,7 @@ public class EmailNotifier implements NotificationSender {
             helper.setText(request.getMessage(), true);
             mailSender.send(message);
         } catch (MessagingException e) {
+            logger.error("Failed to send message ", e);
             throw new RuntimeException("Failed to send email", e);
         }
     }

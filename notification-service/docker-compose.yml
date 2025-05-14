@@ -6,8 +6,8 @@ services:
     container_name: postgres
     environment:
       POSTGRES_DB: notificationdb
-      POSTGRES_USER: notifuser
-      POSTGRES_PASSWORD: notifpass
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD:  ${DB_PASSWORD}
     ports:
       - "5432:5432"
     volumes:
@@ -22,9 +22,14 @@ services:
       - postgres
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/notificationdb
-      SPRING_DATASOURCE_USERNAME: notifuser
-      SPRING_DATASOURCE_PASSWORD: notifpass
-      LOG_PATH: /app
+      SPRING_DATASOURCE_USERNAME: ${DB_USER}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+      LOG_PATH: .
+      SMTP_HOST:  ${SMTP_HOST}
+      SMTP_PORT:  ${SMTP_PORT}
+      SMTP_USERNAME:  ${SMTP_USERNAME}
+      SMTP_PASSWORD:  ${SMTP_PASSWORD}
+
     ports:
       - "8080:8080"
     networks:
