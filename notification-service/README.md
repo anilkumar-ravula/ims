@@ -97,7 +97,7 @@ docker build -t imr/notification-service .
 docker-compose up -d
 ```
 
-## Checking API is running:
+##  API Validation:
 
 # Setup smtp password for gmail :
 ```
