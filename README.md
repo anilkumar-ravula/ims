@@ -128,32 +128,7 @@ The Alertmanager component handles all routing and filtering of incoming alerts 
 
 ---
 
-## 🚀 Getting Started
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/your-org/imr-system.git
-   cd imr-system
-   ```
-
-2. **Start the stack (Dev)**
-   ```bash
-   docker-compose up -d
-   ```
-
-3. **Access Services**
-  - Prometheus: http://localhost:9090
-  - Alertmanager: http://localhost:9093
-  - Notification API: http://localhost:8080/notify
-
-4. **Send a Test Alert**
-   ```bash
-   curl -X POST http://localhost:8080/notify      -H "Content-Type: application/json"      -d '{"tenant": "clientA", "type": "ERROR", "message": "Test alert!"}'
-   ```
-
----
-
-## 📘 Resources
 
 - [Notification Service README](./notification-service/README.md)
 - [Prometheus Docs](https://prometheus.io/docs/introduction/overview/)
