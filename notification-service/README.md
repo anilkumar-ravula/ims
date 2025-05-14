@@ -2,6 +2,34 @@
 
 A Spring Boot-based microservice for sending notifications via Email, Slack, SMS, and Calls. Designed for integration with systems like Alertmanager or internal services via REST.
 
+## 🔧 Key Capabilities
+
+Multi-Channel Support:
+
+Email (SMTP / external service like SendGrid)
+
+Slack (via Webhook)
+
+SMS (e.g., Twilio)
+
+Mobile Call (e.g., Twilio voice call API)
+
+REST Endpoints for Ingestion:
+
+/api/notify — Accepts generic POST requests (compatible with Alertmanager & other services)
+
+Retry & Failure Handling:
+
+Configurable retry mechanism using Spring Retry or custom logic with a message queue.
+
+Notification Tracking:
+
+Persisted in a relational DB (e.g., PostgreSQL) with status: PENDING, SENT, FAILED, RETRYING, etc.
+
+Data Encrptions:
+
+
+
 ## High Level Architecture
 
 ```
@@ -12,7 +40,7 @@ A Spring Boot-based microservice for sending notifications via Email, Slack, SMS
 [NotificationService]
          │
 ┌────────┼──────────────┐
-│ sender.com.imr.notification.EmailSenderService   │
+│ EmailSenderService   │
 │ SlackSenderService   │
 │ SMSSenderService     │
 │ CallSenderService    │
