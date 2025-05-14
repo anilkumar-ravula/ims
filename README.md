@@ -1,27 +1,40 @@
-## Incident Management and Reporting (IMR)
+# 🚨 Incident Management and Reporting (IMR)
 
-IMR is composed of couple microservice which covers below business use cases.
+**IMR** is a microservice-driven system that helps detect, manage, and notify stakeholders of various types of incidents in real time. It integrates **monitoring, alerting, and notification delivery** across infrastructure, applications, and business processes.
 
+---
 
-Monitoring infrastructure (e.g., CPU, memory, disk)
+## ✅ Use Cases
 
-Application errors or incidents
+IMR addresses three core categories of incidents:
 
-Business events (e.g., order failure, payment issues)
+- **Infrastructure Monitoring**
+    - Examples: High CPU, memory, disk usage
+    - Tool: Prometheus
 
-## High Level System Interaction
+- **Application Errors**
+    - Examples: API exceptions, service downtimes
+    - Tool: Custom error-reporting from Spring Boot apps
 
-```
+- **Business Events**
+    - Examples: Order failures, payment issues
+    - Tool: Business logic triggers that post to the Notification Service
+
+---
+
+## 🧩 System Architecture Overview
+
+```plaintext
                         +-------------------+
                         |   Prometheus      |
-                        | (infra metrics)   |
+                        | (Infra Metrics)   |
                         +-------------------+
                                  |
                              [ALERTS]
                                  |
                         +-------------------+
                         |  Alertmanager     |
-                        | (rules & routing) |
+                        | (Rules & Routing) |
                         +-------------------+
                                  |
                                  v
@@ -34,14 +47,13 @@ Business events (e.g., order failure, payment issues)
 
 +----------------------+         +------------------------+
 | Spring Boot Apps     |         | Business Event Service |
-| (app logs, errors)   |         | (e.g. Order/Payment)   |
+| (App logs, errors)   |         | (Order/Payment errors) |
 +----------------------+         +------------------------+
-|                                   |
-REST/HTTP calls to Notification API       |
-+-----------------------------------+
-
+              \                        /
+               \     [HTTP POST]     /
+                \------------------/
+                      Notification API
 ```
-
 
 ## 🔔 Notification Service
 
