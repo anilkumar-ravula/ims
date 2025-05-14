@@ -129,7 +129,7 @@ The Alertmanager component handles all routing and filtering of incoming alerts 
 ---
 
 
-
+- [Research](https://chatgpt.com/share/6824e3e2-2ab4-8000-aa04-5f485ed14f3b)
 - [Notification Service README](./notification-service/README.md)
 - [Prometheus Docs](https://prometheus.io/docs/introduction/overview/)
 - [Alertmanager Docs](https://prometheus.io/docs/alerting/latest/alertmanager/)
