@@ -1,3 +1,4 @@
 apiVersion: v2
-name: notification-service
+name: notification-stack
+description: Helm chart for Spring Boot Notification Service + PostgreSQL
 version: 0.1.0

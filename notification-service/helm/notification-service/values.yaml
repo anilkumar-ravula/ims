@@ -1,9 +1,20 @@
-replicaCount: 1
+notificationService:
+  image: imr/notification-service:latest
+  replicas: 1
+  port: 8080
+  env:
+    dbUrl: jdbc:postgresql://postgres:5432/notificationdb
+    dbUser: notification_user
+    dbPassword: notification_pass
 
-image:
-  repository: your-dockerhub-username/notification-service
-  tag: latest
-  pullPolicy: IfNotPresent
+postgres:
+  image: postgres:16
+  port: 5432
+  db: notificationdb
+  user: notification_user
+  password: notification_pass
+
+replicaCount: 1
 
 service:
   type: ClusterIP
@@ -16,8 +27,8 @@ env:
   DB_HOST: "localhost"
   DB_PORT: "5432"
   DB_NAME: "notifications"
-  DB_USERNAME: "user"
-  DB_PASSWORD: "pass"
+  DB_USERNAME: "notification_user"
+  DB_PASSWORD: "notification_pass"
   HIBERNATE_DDL_AUTO: "update"
   SHOW_SQL: "true"
 

@@ -36,7 +36,7 @@ public class NotificationService {
 
         try {
             if (senderOpt.isPresent()) {
-                senderOpt.get().send(notification);
+                senderOpt.get().send(request);
                 notification.setStatus(NotificationStatus.SENT);
             } else {
                 throw new IllegalArgumentException("Unsupported channel");

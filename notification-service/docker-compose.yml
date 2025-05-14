@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      POSTGRES_DB: notificationdb
+      POSTGRES_USER: notifuser
+      POSTGRES_PASSWORD: notifpass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - notif-network
+
+  notification-service:
+    image: imr/notification-service:latest  # <-- Replace with your image name
+    container_name: notification-service
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/notificationdb
+      SPRING_DATASOURCE_USERNAME: notifuser
+      SPRING_DATASOURCE_PASSWORD: notifpass
+      LOG_PATH: /app
+    ports:
+      - "8080:8080"
+    networks:
+      - notif-network
+
+volumes:
+  postgres_data:
+
+networks:
+  notif-network:
