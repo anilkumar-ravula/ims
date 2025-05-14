@@ -1,0 +1,31 @@
+replicaCount: 1
+
+image:
+  repository: your-dockerhub-username/notification-service
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8080
+
+resources: {}
+
+env:
+  SERVER_PORT: "8080"
+  DB_HOST: "localhost"
+  DB_PORT: "5432"
+  DB_NAME: "notifications"
+  DB_USERNAME: "user"
+  DB_PASSWORD: "pass"
+  HIBERNATE_DDL_AUTO: "update"
+  SHOW_SQL: "true"
+
+  KAFKA_BOOTSTRAP_SERVERS: "localhost:9092"
+  KAFKA_CONSUMER_GROUP: "notification-service-group"
+  KAFKA_OFFSET_RESET: "earliest"
+
+  SMTP_HOST: "smtp.example.com"
+  SMTP_PORT: "587"
+  SMTP_USERNAME: "your-email@example.com"
+  SMTP_PASSWORD: "your-password"

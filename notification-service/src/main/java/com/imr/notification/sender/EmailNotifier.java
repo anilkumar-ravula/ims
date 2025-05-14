@@ -1,0 +1,41 @@
+package com.imr.notification.sender;
+
+import com.imr.notification.model.Notification;
+import com.imr.notification.model.NotificationRequest;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
+import lombok.RequiredArgsConstructor;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class EmailNotifier implements NotificationSender {
+    private final JavaMailSender mailSender;
+
+    public void send(NotificationRequest request) {
+        try {
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            helper.setTo(request.getRecipient());
+            helper.setSubject("Incident Notification");
+            helper.setText(request.getMessage(), true);
+            mailSender.send(message);
+        } catch (MessagingException e) {
+            throw new RuntimeException("Failed to send email", e);
+        }
+    }
+
+
+    @Override
+    public void send(Notification notification) {
+
+    }
+
+    @Override
+    public String getChannel() {
+        return "";
+    }
+}
+
