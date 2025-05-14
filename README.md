@@ -27,7 +27,7 @@ IMR addresses three core categories of incidents:
 
 ```
                         +-------------------+
-                        |   Prometheus      |
+                        |   Prometheus/Agents      |
                         | (Infra Metrics)   |
                         +-------------------+
                                  |
