@@ -3,15 +3,21 @@ version: '3.8'
 services:
   postgres:
     image: postgres:15
-    container_name: postgres
+    container_name: postgres-multitenant
+    restart: always
     environment:
-      POSTGRES_DB: notificationdb
+      POSTGRES_DB: clienta
       POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD:  ${DB_PASSWORD}
+      POSTGRES_PASSWORD: ${DB_PWD}
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+        - ./postgres-init:/docker-entrypoint-initdb.d
+        - ./postgres/pg_hba.conf:/etc/postgresql/pg_hba.conf
+    tmpfs:
+      - /var/lib/postgresql/data
+    command: postgres -c hba_file=/etc/postgresql/pg_hba.conf
+
     networks:
       - notif-network
 
@@ -21,15 +27,17 @@ services:
     depends_on:
       - postgres
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/notificationdb
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/clienta
       SPRING_DATASOURCE_USERNAME: ${DB_USER}
-      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
-      LOG_PATH: .
+      SPRING_DATASOURCE_PASSWORD: ${DB_PWD}
+      LOG_PATH: /logs
       SMTP_HOST:  ${SMTP_HOST}
       SMTP_PORT:  ${SMTP_PORT}
       SMTP_USERNAME:  ${SMTP_USERNAME}
       SMTP_PASSWORD:  ${SMTP_PASSWORD}
-
+      DB_USER: ${DB_USER}
+      DB_PWD: ${DB_PWD}
+      DB_NAME: clienta
     ports:
       - "8080:8080"
     networks:

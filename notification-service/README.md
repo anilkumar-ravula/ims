@@ -99,9 +99,9 @@ docker-compose up -d
 
 Checking API is running:
 
-curl --location 'http://localhost:8080/api/notify'
 
 curl --location 'http://localhost:8080/api/notify' \
+--header 'X-Tenant-ID: clienta' \
 --header 'Content-Type: application/json' \
 --data-raw '{
 "channel": "EMAIL",
@@ -109,14 +109,9 @@ curl --location 'http://localhost:8080/api/notify' \
 "message": "Server down!",
 "incidentId": "1234"
 }'
-curl --location 'http://localhost:8080/api/notify' \
---header 'Content-Type: application/json' \
---data-raw '{
-"channel": "EMAIL",
-"recipient": "user@example.com",
-"message": "Server down!",
-"incidentId": "1234"
-}'
+
+curl --location 'http://localhost:8080/api/notify'
+
 
 Ideal Response if it is working : Welcome to notifications
 
