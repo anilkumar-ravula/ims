@@ -22,7 +22,7 @@ public class DataSourceConfig {
     @Bean
     public DataSource dataSource() {
         Map<Object, Object> tenantDataSources = new HashMap<>();
-
+        //TODO : need to move these configs to db
         tenantDataSources.put("clienta", createDataSource("jdbc:postgresql://postgres:5432/clienta", dbUSer, dnPwd));
         tenantDataSources.put("clientb", createDataSource("jdbc:postgresql://postgres:5432/clientb", dbUSer, dnPwd));
 
