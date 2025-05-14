@@ -97,9 +97,28 @@ docker build -t imr/notification-service .
 docker-compose up -d
 ```
 
-Checking API is running:
+## Checking API is running:
+
+# Setup smtp password for gmail :
+```
+Here's how to find your Gmail SMTP settings:
+Access your Google Account: Go to [Link: myaccount.google.com/apppasswords https://myaccount.google.com/apppasswords].
+Generate an App Password:
+Select "Mail" as the app and "Other (Custom name)" as the device.
+Give the app a descriptive name to help you remember it.
+Copy the App Password: This password will be your SMTP password.
+
+configure these values in .env file for dcker compose or for help 
+
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USERNAME=youremail
+SMTP_PASSWORD=passwordfromabovestep
 
 
+```
+
+```
 curl --location 'http://localhost:8080/api/notify' \
 --header 'X-Tenant-ID: clienta' \
 --header 'Content-Type: application/json' \
@@ -114,7 +133,7 @@ curl --location 'http://localhost:8080/api/notify'
 
 
 Ideal Response if it is working : Welcome to notifications
-
+```
 ## ☸️ Kubernetes (via Helm)
 
 Build and push your Docker image:
